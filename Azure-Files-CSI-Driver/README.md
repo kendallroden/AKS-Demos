@@ -72,16 +72,19 @@ Use the following steps to validate the required Azure Resources are set up appr
       ![PrivateEndpoint1](assets/PrivateEndpoint1.png)
 
    2. Next, ensure the `Target sub-resource` within the Storage Account is set to `file`.
+      
       ![PrivateEndpoint2](assets/PrivateEndpoint2.png)
 
    3. Proceeed to the `Configuration` step and follow the below steps: 
       - From the `Virtual Network` dropdown, select the VNET you created to hold your AKS and private endpoint subnets.
       - From the `Subnet` dropdown, select the subnet you created to hold the private endpoint specifically.
       - Ensure you leave the `Integrate with private DNS zone` set to true. The configuration defaults can be left as-is.
+      
       ![PrivateEndpoint3](assets/PrivateEndpoint3.png)
 
    4. Confirm your private endpoint was created successfully via the `Private endpoint connections` tab.
-      ![PrivateEndpointView](assets/privateendpointview.png)
+      
+      ![PrivateEndpointView](assets/PrivateEndpointView.png)
    
    5. Return to the AKS Subscription and validate the Private endpoint, Network interface and Private DNS zone related to the Storage Account private endpoint were created successfully. For additional information on Azure Private Link, view the following resources: 
       - [What is an Azure Private Endpoint](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
