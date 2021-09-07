@@ -36,11 +36,11 @@ Use the following steps to validate the required Azure Resources are set up appr
    - AKS Cluster: `aks-csitest`
    - Azure Virtal Network: `private-network`
    >NOTE: The Private endpoint, Network interface and Private DNS zone are all related to the Storage Account private endpoint. We will walk through this setup in the next section.
-   ![AKSRG](./assets/aksrg.png)
+   ![AKSRG](assets/AKSRG.png)
 
 2. Within the Virtual Network, two subnets should be provisioned. One subnet is for AKS Node Pool VMSS and the other is for the Storage Account private endpoint. The VNET and AKS Subnet should be created first. Then, the subnet information should be passed in when creating the cluster via ARM, Bicep or using the Azure CLI. For information on creating/using an existing virtual network with AKS, click [here](https://docs.microsoft.com/en-us/azure/aks/configure-kubenet).  
-   ![VirtualNetworkSubnets](assets/virtualnetworksubnets.png)
-   ![VirtualNetworkResources](assets/virtualnetworkresources.png)
+   ![VirtualNetworkSubnets](assets/VirtualNetworkSubnets.png)
+   ![VirtualNetworkResources](assets/VirtualNetworkResources.png)
 
 ### Subscription 2: Storage Account 
 >Note: While this resource sits in a different subscription than the AKS Cluster and Virtual Network, it does exist within the same Azure Tenant. 
@@ -49,14 +49,14 @@ Use the following steps to validate the required Azure Resources are set up appr
    - Subscription: `raykao GBB`
    - Resource Group: `kendalltemp`
    - Storage Account: `crosssubfilesharesa`
-   ![StorageAccount](assets/storageaccountrgview.png)
+   ![StorageAccount](assets/StorageAccountRGView.png)
 
 2. Within the storage account, ensure you have an existing file share that you will be mounting to the pod via the Azure File CSI Driver. Make note of the following: 
    - File Share Name: `test`  
-   ![FileShare](assets/fileshareview.png)
+   ![FileShare](assets/FileShareView.png)
 
 3. Within the file share, I have uploaded an `index.php` file that will be used to test the share is mounted successfully in a future step. I have included this file in the `example-files` directory. 
-   ![FileShareContents](assets/filesharecontents.png)
+   ![FileShareContents](assets/FileShareContents.png)
 
 4. Let's validate the networking configuration for the storage account via the `Networking` tab via the left sidebar. A few noteable callouts: 
    - Under the `Firewalls and virtual networks` tab on the top of the networking view, ensure you are only allowing access from `selected networks`. 
