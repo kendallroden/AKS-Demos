@@ -36,7 +36,7 @@ Use the following steps to validate the required Azure Resources are set up appr
    - AKS Cluster: `aks-csitest`
    - Azure Virtal Network: `private-network`
    >NOTE: The Private endpoint, Network interface and Private DNS zone are all related to the Storage Account private endpoint. We will walk through this setup in the next section.
-   ![AKSRG](assets/aksrg.png)
+   ![AKSRG](./assets/aksrg.png)
 
 2. Within the Virtual Network, two subnets should be provisioned. One subnet is for AKS Node Pool VMSS and the other is for the Storage Account private endpoint. The VNET and AKS Subnet should be created first. Then, the subnet information should be passed in when creating the cluster via ARM, Bicep or using the Azure CLI. For information on creating/using an existing virtual network with AKS, click [here](https://docs.microsoft.com/en-us/azure/aks/configure-kubenet).  
    ![VirtualNetworkSubnets](assets/virtualnetworksubnets.png)
