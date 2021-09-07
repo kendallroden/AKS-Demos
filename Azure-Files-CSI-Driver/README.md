@@ -107,13 +107,20 @@ Use the following steps to validate the required Azure Resources are set up appr
 
 4. Next, open the file `deploy.yaml` in the same directory and replace `PERSISTENT_VOLUME_CLAIM_NAME` with the name assigned to the Persistent Volume Claim in step 3. Save the file when you are done editing.
 
-5. Using kubectl, create the PV and PVC resources in the appropriate namespace in your AKS Cluster.
+5. Before deploying the PV and PVC, we need to create a Kubernetes Secret to hold the Storage Account access information.
+   >NOTE: Will update the repo once the Storage Class approach supports cross-subscription setup  
+
+   ```bash
+   kubectl create secret generic azure-secret --from-literal azurestorageaccountname=NAME --from-literal azurestorageaccountkey="KEY" --type=Opaque -n YOUR_NAMESPACE
+   ```
+
+6. Using kubectl, create the PV and PVC resources in the appropriate namespace in your AKS Cluster.
    
    ```bash
    kubectl apply -f cross-sub-pv-pvc.yaml -n YOUR_NAMESPACE
    ```
 
-6. In order to validate the Persistent Volume is successfully bound to the Persistent Volume Claim, run the following commands: 
+7. In order to validate the Persistent Volume is successfully bound to the Persistent Volume Claim, run the following commands: 
    
    ```bash
    kubectl get pv -n YOUR_NAMESPACE 
@@ -129,12 +136,12 @@ Use the following steps to validate the required Azure Resources are set up appr
    kubectl describe pvc YOUR_PVC_NAME -n YOUR_NAMESPACE 
    ```
 
-7. After validating the PV is bound, create the Deployment and the Service (used for testing purposes) in the same namespace from step 5.
+8. After validating the PV is bound, create the Deployment and the Service (used for testing purposes) in the same namespace from step 5.
    
    ```bash
    kubectl apply -f deloy.yaml -n YOUR_NAMESPACE
    ```
-8. Validate the deployment was successful using the commands below. Your pods should be running, and your service should be created. It may take a bit for your service External-IP to resolve.  
+9. Validate the deployment was successful using the commands below. Your pods should be running, and your service should be created. It may take a bit for your service External-IP to resolve.  
    
    ```bash
    kubectl get pods -n YOUR_NAMESPACE    
@@ -148,9 +155,9 @@ Use the following steps to validate the required Azure Resources are set up appr
    kubectl describe service YOUR_SERVICE_NAME -n YOUR_NAMESPACE 
    ```
 
-9. If you have not already done so, add the `index.php` file from the `example-files` directory into the Azure File Share that was mounted to the pod.
+10. If you have not already done so, add the `index.php` file from the `example-files` directory into the Azure File Share that was mounted to the pod.
 
-10. Run the following command to exec into one of the pods to validate the file share has been successfully mounted with all of the existing file share contents: 
+11. Run the following command to exec into one of the pods to validate the file share has been successfully mounted with all of the existing file share contents: 
    ```bash
    kubectl exec -it YOUR_POD_NAME -n YOUR_NAMESPACE -- bash 
    ```
