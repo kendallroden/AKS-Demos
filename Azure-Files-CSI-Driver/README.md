@@ -53,6 +53,7 @@ Use the following steps to validate the required Azure Resources are set up appr
 
 2. Within the storage account, ensure you have an existing file share that you will be mounting to the pod via the Azure File CSI Driver. Make note of the following: 
    - File Share Name: `test`  
+   - Share size;: 5Ti
    ![FileShare](assets/FileShareView.png)
 
 3. Within the file share, I have uploaded an `index.php` file that will be used to test the share is mounted successfully in a future step. I have included this file in the `example-files` directory. 
@@ -97,8 +98,8 @@ Use the following steps to validate the required Azure Resources are set up appr
 
 2. Using a YAML editor of your choice, navigate to `azure-files-csi-driver/example-file` folder and open `cross-sub-pv-pvc.yaml`.
 
-3. Enter the required values to customize the Persistent Volume and Persistent Volume Claim based on your environment configuration. Save the file when you are done editing.
-   > NOTE: Values that need to be replaced are in UPPERCASE 
+3. Enter the required values to customize the Persistent Volume and Persistent Volume Claim based on your environment configuration. Save the file when you are done editing. 
+   > NOTE: Values that need to be replaced are in UPPERCASE. 
 
 4. Next, open the file `deploy.yaml` in the same directory and replace `PERSISTENT_VOLUME_CLAIM_NAME` with the name assigned to the Persistent Volume Claim in step 3. Save the file when you are done editing.
 
