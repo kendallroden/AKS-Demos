@@ -134,7 +134,7 @@ Use the following steps to validate the required Azure Resources are set up appr
    ```bash
    kubectl apply -f deloy.yaml -n YOUR_NAMESPACE
    ```
-8. Validate the deployment was successful use the commands below. Your pods should be running, and your service should be created. It may take a bit for your service External-IP to resolve.  
+8. Validate the deployment was successful using the commands below. Your pods should be running, and your service should be created. It may take a bit for your service External-IP to resolve.  
    
    ```bash
    kubectl get pods -n YOUR_NAMESPACE    
@@ -148,11 +148,11 @@ Use the following steps to validate the required Azure Resources are set up appr
    kubectl describe service YOUR_SERVICE_NAME -n YOUR_NAMESPACE 
    ```
 
-9. If you have not already done so, add the `index.php` file from the `example-files` directory into the mounted file share.
+9. If you have not already done so, add the `index.php` file from the `example-files` directory into the Azure File Share that was mounted to the pod.
 
 10. Run the following command to exec into one of the pods to validate the file share has been successfully mounted with all of the existing file share contents: 
    ```bash
-   kubectl exec -it YOUR_POD_NAME -- bash 
+   kubectl exec -it YOUR_POD_NAME -n YOUR_NAMESPACE -- bash 
    ```
 Once you are inside of the pod, run `ls` to view the contents of the file share mounted to the pod. You should see the `index.php` file. As an additional validation step, navigate to the External-IP of the service. 
 
