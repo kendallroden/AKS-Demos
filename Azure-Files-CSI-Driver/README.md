@@ -53,7 +53,7 @@ Use the following steps to validate the required Azure Resources are set up appr
 
 2. Within the storage account, ensure you have an existing file share that you will be mounting to the pod via the Azure File CSI Driver. Make note of the following: 
    - File Share Name: `test`  
-   - Share size;: 5Ti
+   - Share size: `5TiB`
    ![FileShare](assets/FileShareView.png)
 
 3. Within the file share, I have uploaded an `index.php` file that will be used to test the share is mounted successfully in a future step. I have included this file in the `example-files` directory. 
@@ -62,11 +62,12 @@ Use the following steps to validate the required Azure Resources are set up appr
 4. Let's validate the networking configuration for the storage account via the `Networking` tab via the left sidebar. A few noteable callouts: 
    - Under the `Firewalls and virtual networks` tab on the top of the networking view, ensure you are only allowing access from `selected networks`. 
    - Add your local IP address if you would like to allow access from your local machine 
+  
    ![StorageAccountNetworking](assets/StorageAccountNetworkView.png)
 
 5. Switch to the `Private endpoint connections` tab on the top of the page to create and/or verify the existence of a private endpoint for the Storage Account in the appropriate VNET and Subnet. 
 
-   1. Use the Subscription dropdown to select your **secondary subscription** in order to access the resource group holding the AKS Cluster and related networking components. The `Name` of the private endpoint is up to you. S
+   1. Use the Subscription dropdown to select your **secondary subscription** in order to access the resource group holding the AKS Cluster and related networking components. The `Name` of the private endpoint is up to you.
       
       ![PrivateEndpoint1](assets/PrivateEndpoint1.png)
 
