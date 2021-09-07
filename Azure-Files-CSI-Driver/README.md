@@ -4,7 +4,7 @@ Use the below steps to set up Azure File CSI Driver on an Azure Kubernetes Servi
 - Static Provisioning with an existing storage account and file share
 - Azure file share is deployed in a different Azure subscription than the AKS Cluster
 - Azure file share resource is protected via private endpoint  
-- Pods running in the AKS cluser need Read-Only access to mounted storage
+- Pods running in the AKS cluster need Read-Only access to mounted storage
 
 The following documentation builds on ideas shared in the following resources. Please refer to these if you need help with the initial Azure deployment. Keep in mind they will need to be tweaked, as they do not take into consideration the cross subscription requirement or the Read-Only requirement.
 - [AKS: Persistent Volume Claim with an Azure File Storage protected with a Private Endpoint by Carlos Mendible](https://carlos.mendible.com/2021/08/02/aks-persistent-volume-claim-with-an-azure-file-storage-protected-with-a-private-endpoint/)
