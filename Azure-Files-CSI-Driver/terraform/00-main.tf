@@ -69,4 +69,9 @@ output fileShareName {
 
 output storageAccountAccessKey {
 	value = azurerm_storage_account.spoke2.primary_access_key
+	sensitive = true
+}
+
+output "storageServerFQDN" {
+  value = azurerm_private_endpoint.storage-spoke2.private_dns_zone_configs[0].record_sets[0].fqdn
 }
