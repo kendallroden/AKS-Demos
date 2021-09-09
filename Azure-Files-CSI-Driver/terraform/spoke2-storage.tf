@@ -75,9 +75,9 @@ resource "azurerm_private_dns_zone_virtual_network_link" "storage-spoke2" {
 	virtual_network_id    = azurerm_virtual_network.spoke2.id
 }
 
-resource "azurerm_private_endpoint" "storage-spoke" {
+resource "azurerm_private_endpoint" "storage-spoke2" {
 	provider = azurerm.sub2
-	name = "pe-storage-spoke"
+	name = "pe-storage-spoke2"
 	location = azurerm_resource_group.spoke2.location
 	resource_group_name = azurerm_resource_group.spoke2.name
 	subnet_id = azurerm_subnet.spoke2-pe.id
