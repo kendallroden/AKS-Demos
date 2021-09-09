@@ -45,6 +45,13 @@ resource "azurerm_storage_share" "spoke2" {
   quota                = 5120
 }
 
+resource "azurerm_storage_share_file" "example" {
+    provider = azurerm.sub2
+	name             = "index.php"
+	storage_share_id = azurerm_storage_share.spoke2.id
+	source           = "../example-files/index.php"
+}
+
 resource "azurerm_private_dns_zone" "priv-dns-spoke" {
 	provider = azurerm.sub2
 	name                = "privatelink.file.core.windows.net"
