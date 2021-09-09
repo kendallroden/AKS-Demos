@@ -75,3 +75,11 @@ output storageAccountAccessKey {
 output "storageServerFQDN" {
   value = azurerm_private_endpoint.storage-spoke2.private_dns_zone_configs[0].record_sets[0].fqdn
 }
+
+output clusterName {
+	value = azurerm_kubernetes_cluster.spoke1.name
+}
+
+output clusterRgName {
+	value = azurerm_resource_group.spoke1.name
+}
