@@ -8,14 +8,14 @@ terraform {
 }
 
 provider azurerm {
-	alias = "hub"
-	subscription_id = var.hubSubscriptionId
+	alias = "sub1"
+	subscription_id = var.sub1SubscriptionId
 	features {}
 }
 
 provider azurerm {
-	alias = "spoke"
-	subscription_id = var.spokeSubscriptionId
+	alias = "sub2"
+	subscription_id = var.sub2SubscriptionId
 	features {}
 }
 
@@ -23,11 +23,11 @@ variable "prefix" {
   type = string
   default = "rk"
 }
-variable "hubSubscriptionId" {
+variable "sub1SubscriptionId" {
   type = string
 }
 
-variable "spokeSubscriptionId" {
+variable "sub2SubscriptionId" {
   type = string
 }
 
@@ -36,12 +36,37 @@ variable "hub_address_space" {
   default = "10.0.0.0/16"
 }
 
-variable "spoke_address_space" {
+variable "spoke1_address_space" {
   type = string
-  default = "192.168.0.0/16"
+  default = "10.1.0.0/16"
+}
+
+variable "spoke2_address_space" {
+  type = string
+  default = "10.2.0.0/16"
 }
 
 locals {
   prefix = "${var.prefix}csitest"
   location = "eastus"
+}
+
+output sub1SubscriptionId {
+	value = var.sub1SubscriptionId
+}
+
+output sub2SubscriptionId {
+	value = var.sub2SubscriptionId
+}
+
+output storageAccountName {
+	value = azurerm_storage_account.spoke2.name
+}
+
+output fileShareName {
+	value = azurerm_storage_share.spoke2.name
+}
+
+output storageAccountAccessKey {
+	value = azurerm_storage_account.spoke2.primary_access_key
 }
