@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: CHOOSE_PERSISTENT_VOLUME_NAME
+  name: ${PERSISTENT_VOLUME_NAME}
 spec:
   capacity:
-    storage: STORAGE_ACCOUNT_SIZE
+    storage: ${STORAGE_ACCOUNT_SIZE}
   accessModes:
     - ReadOnlyMany
   persistentVolumeReclaimPolicy: Retain  # if set as "Delete" file share would be removed in pvc deletion
@@ -19,26 +19,26 @@ spec:
   csi:  # https://kubernetes.io/docs/concepts/storage/volumes/#csi
     driver: file.csi.azure.com
     readOnly: true # An optional boolean value indicating whether the volume is to be "ControllerPublished" (attached) as read only. Default is 'false'
-    volumeHandle: CHOOSE_UNIQUE_VOLUME_ID     # make sure this volumeid is unique in the cluster
+    volumeHandle: ${UNIQUE_VOLUME_ID}     # make sure this volumeid is unique in the cluster
     volumeAttributes:
-      resourceGroup: SA_RESOURCEGROUP  # optional, set this when storage account is not in the same resource group as agent node
-      shareName: FILESHARE_NAME  # only file share name, don't use full path
-      storageAccount: SA_NAME
-      server: SA_NAME.privatelink.file.core.windows.net
+      # resourceGroup: ${SA_RESOURCEGROUP}  # optional, set this when storage account is not in the same resource group as agent node
+      shareName: ${FILESHARE_NAME}  # only file share name, don't use full path
+      storageAccount: ${STORAGE_ACCOUNT_NAME}
+      server: ${STORAGE_ACCOUNT_NAME}.privatelink.file.core.windows.net
     nodeStageSecretRef:
-      name: K8s_SECRET_NAME
-      namespace: SECRET_NAMESPACE #optional, set if secret is not in the same namespace as the PV 
+      name: azure-secret
+      namespace: default #optional, set if secret is not in the same namespace as the PV 
 
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: CHOOSE_PERSISENT_VOLUME_CLAIM_NAME
+  name: ${PERSISENT_VOLUME_CLAIM_NAME}
 spec:
   accessModes:
     - ReadOnlyMany 
   resources:
     requests:
-      storage: 5Ti # Must match the size of the pre-provisioned File Share 
-  volumeName: PERSISTENT_VOLUME_NAME
+      storage: "5120" # Must match the size of the pre-provisioned File Share 
+  volumeName: ${PERSISTENT_VOLUME_NAME}
   storageClassName: ""

@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: html
           persistentVolumeClaim:
-            claimName: PERSISTENT_VOLUME_CLAIM_NAME
+            claimName: ${PERSISENT_VOLUME_CLAIM_NAME}
 ---
 apiVersion: v1
 kind: Service
